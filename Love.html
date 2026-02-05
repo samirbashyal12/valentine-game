@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will you be my Valentine? ❤️</title>
+  <style>
+    /* ===== Body & Container ===== */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+
+      /* First page gradient background */
+      background: linear-gradient(135deg, #ffe6eb, #ffc2d1);
+      overflow: hidden; /* hide hearts outside screen */
+    }
+
+    .container {
+      text-align: center;
+      z-index: 2; /* above hearts */
+      padding: 30px;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: 2.2rem;
+      margin: 0;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      padding: 12px 30px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+      margin-right: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    #yesBtn:hover {
+      background: #ff1f4a;
+    }
+
+    #noBtn {
+      background: #cccccc;
+      color: black;
+      position: absolute;
+    }
+
+    #message {
+      margin-top: 20px;
+      color: #ff4d6d;
+      font-weight: bold;
+      min-height: 20px;
+    }
+
+    /* ===== Hearts ===== */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      top: 100%;
+      z-index: 1;
+      animation: floatUp linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    /* ===== Mobile Responsive ===== */
+    @media screen and (max-width: 600px) {
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+
+      .buttons {
+        height: 100px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <div class="buttons">
+      <button id="yesBtn" onclick="yesClicked()">Yes</button>
+      <button id="noBtn" onmouseover="moveNo()">No</button>
+    </div>
+
+    <div id="message"></div>
+  </div>
+
+  <script>
+    /* ===== Moving No Button ===== */
+    const messages = [
+      "Are you sure? 🥺",
+      "Think again 💕",
+      "I brought chocolates 🍫",
+      "What about flowers 🌹",
+      "You can’t escape love 😘",
+      "But i love you Sanu 🍫",
+    "Please mero sanuuu 🌹",
+    "Please Mero kanxii 😘",
+    "Please my love",
+    "Timilai mero kasam",
+    ];
+
+    let yesScale = 1;
+
+    function moveNo() {
+      const noBtn = document.getElementById("noBtn");
+      const container = document.querySelector(".buttons");
+      const message = document.getElementById("message");
+      const yesBtn = document.getElementById("yesBtn");
+      const title = document.querySelector("h1");
+
+      const maxX = container.clientWidth - noBtn.offsetWidth;
+      const maxY = container.clientHeight - noBtn.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+
+      message.textContent =
+        messages[Math.floor(Math.random() * messages.length)];
+
+      // Grow Yes button
+      yesScale += 0.1;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    }
+
+    /* ===== After Clicking Yes ===== */
+    function yesClicked() {
+      document.body.style.backgroundImage = "url('Love.jpg')";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundPosition = "center";
+      document.body.style.backgroundSize = "cover";
+      document.body.style.overflow = "hidden";
+
+      document.querySelector(".container").style.background = "transparent";
+
+      document.querySelector(".container").innerHTML = `
+        <h1 style="color:#ff4d6d; text-shadow:0 0 10px black;">
+          YAY!!! I knew you would say Yes 💕🥰
+        </h1>
+        <h1>I Love you❤️</h1>
+         <h1>Thankyou so much for choosing me my Love</h1>
+        <p style="color: #ffd6e0; text-shadow: 2px 2px 6px black;">You just made me the happiest person 💖
+        I am so lucky that you are my Valentine for now and for ever.
+         Since the day i saw you there was a sudden sign that she's the one since then whatever 
+         has happened with us its all destiny sabai kura mathi bata lekhera aako jasto lagxa 
+         timi nai mero antim maya hou mero sanu maile jati galtiharu garepani anjan ma timilai sataye pani
+         malai maaf garideu timilai hurt garne kunai pani intension xaina mero jati sakdo timilai
+         khusi dine kosis garxu ani mero karanle timi kahile pani runa napaross timilai kunai pani halatma gumauna chahanna 
+         kinaki you are my smile on the hard days , my calm in the chaos and my greatest blessing. Every moment with you feels like
+         my favourite place to be. I will never ever give up on you because i have been married to you on my head since the day 
+         i proposed you. I am trying my best to be capable enough to make you mine. I want you to be my Valentine forever and want to celebrate
+         every day as if it is Valentine day with you. I Love you my sweetheart, my sanu, my baby, my kanxu, my heart my everything.
+         Happy Valentine's Day❤️ </p>
+        
+      `;
+    }
+
+    /* ===== Floating Hearts ===== */
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+
+      // Random horizontal position
+      heart.style.left = Math.random() * window.innerWidth + "px";
+
+      // Random animation duration between 4s and 10s
+      heart.style.animationDuration = (4 + Math.random() * 6) + "s";
+
+      // Random size
+      const size = 10 + Math.random() * 20;
+      heart.style.width = size + "px";
+      heart.style.height = size + "px";
+      heart.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      heart.style.setProperty("--size", size + "px");
+
+      document.body.appendChild(heart);
+
+      // Remove heart after animation
+      setTimeout(() => {
+        heart.remove();
+      }, parseFloat(heart.style.animationDuration) * 1000);
+    }
+
+    // Create hearts continuously
+    setInterval(createHeart, 300);
+  </script>
+</body>
+</html>
